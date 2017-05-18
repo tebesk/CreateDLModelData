@@ -14,7 +14,7 @@ def Synthesis(Ans_Path, Raw_Path, Save_Path):
     # get directory list
     Large_dirs = getdirs(Ans_Path) ## ex. 12A32
     for L_dir in Large_dirs:
-
+        st = time.time()
         if os.path.isdir(Save_Path+"/"+L_dir) == False:
             os.mkdir(Save_Path+"/"+L_dir)
 
@@ -41,6 +41,7 @@ def Synthesis(Ans_Path, Raw_Path, Save_Path):
                     if os.path.isdir(raw_tmp_dir) == False:
                         os.mkdir(raw_tmp_dir)
                     cv2.imwrite(raw_tmp_dir + M_dir + "_"+ file, raw_img)
+        print L_dir+" is finish. elapsed time:" + (time.time() - st)
 
 
 ##get only directory list(http://lightson.dip.jp/blog/seko/1876)
@@ -62,8 +63,8 @@ if __name__ == '__main__':
 
     st = time.time()
 
-    Synthesis("/home/ys/Share/01_AndeuxWorks/ver20170123",
+    Synthesis("/home/ys/Share/01_AndeuxWorks/ver20170413",
               "/home/ys/Share/11_IMG2BMP",
-              "/home/ys/Share/7_DL_model_set/ver20170123")
+              "/home/ys/Share/7_DL_model_set/ver20170413")
 
     print "fin to create all image: elapsed time %f [sec]" % (time.time() - st)

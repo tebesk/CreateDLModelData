@@ -11,7 +11,7 @@ import AnsMaking as am
 import AreaFinder as AF
 import ImageUtitlity as Util
 from multiprocessing import Process
-
+import sys
 
 
 
@@ -33,9 +33,15 @@ def CreateTrainingModel(NEWPATH, PATH, mode):
             # add denoising
             #img = dn.Denoising(img)
             #half_img = dn.Denoising(half_img)
-            if mode =="12A24" or mode == "12A32" or mode == "12B24" or mode =="12B32" or mode =="12Z32":
+            if mode =="12A24" or mode == "12A32" or mode == "12B24" or mode =="12Z32":
                 img = dn.Denoising_GaussianBlur_Thresh(img, 15, 20)
                 half_img = dn.Denoising_GaussianBlur_Thresh(half_img, 15, 20)
+            elif mode =="15B24" or mode =="8Z32":
+                img = dn.Denoising_GaussianBlur_Thresh(img, 15, 40)
+                half_img = dn.Denoising_GaussianBlur_Thresh(half_img, 15, 40)
+            elif mode =="15A32":
+                img = dn.Denoising_GaussianBlur_Thresh(img, 15, 45)
+                half_img = dn.Denoising_GaussianBlur_Thresh(half_img, 15, 40)
             else:
                 img = dn.Denoising_GaussianBlur_Thresh(img, 15, 30)
                 half_img = dn.Denoising_GaussianBlur_Thresh(half_img, 15, 30)
@@ -133,11 +139,11 @@ if __name__ == '__main__':
     choice = input("1: make only ans 2: make only training 3: make ans and training::")
     st = time.time()
 
-    PATH = "/home/ys/Share/7_DL_model_set/ver20170123"
+    PATH = "/home/ys/Share/7_DL_model_set/ver20170413"
     if (os.path.isdir(PATH)):
         files = os.listdir(PATH)
 
-        cpu_process = 10
+        cpu_process = 12
         process_list = []
         for idx in range(cpu_process):
             p = Process(target=Parllel_ModelMaking, args=(idx, cpu_process, files, PATH, choice))

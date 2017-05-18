@@ -55,9 +55,9 @@ def Leftwiper(img, num):
 
 
 if __name__ == '__main__':
-    img = cv2.imread("/home/ys/Share/7_DL_model_set/ver20170123/12A32/Raw/160824164038_0.bmp")
+    img = cv2.imread("/home/ys/Share/7_DL_model_set/ver20170123/8Z32/Raw/160914171017_450.bmp")
     img_blur_small = cv2.GaussianBlur(img, (15, 15), 0)
-    ret, thresh = cv2.threshold(img_blur_small, 20, 255, cv2.THRESH_TOZERO)
+    ret, thresh = cv2.threshold(img_blur_small, 40, 255, cv2.THRESH_TOZERO)
     cv2.imwrite("/home/ys/Undeux/3.bmp", thresh)
     cv2.imwrite("/home/ys/Undeux/4.bmp",img_blur_small)
 
